@@ -2,6 +2,7 @@ const jayson = require("jayson/promise");
 // const announcements = require("./dao/Announcement");
 const annDao = require("./dao/AnnouncementDao");
 const comments = require("./dao/Comments");
+const log = require("./logger");
 
 const server = jayson.Server({
 
@@ -48,7 +49,10 @@ const server = jayson.Server({
     getByIdAnn: async (id) => {
         let toUpdate = await annDao.getById(id).count_views + 1;
         await annDao.update(id, toUpdate);
+        //логирования
+        log('call method getByIdAnn and increase count views');
         return annDao.getById(id)
+
     },
     getByCountryAnn: async () => await annDao.getByCountry(country),
     getCommList: async () => await comments.getList(),
@@ -57,5 +61,8 @@ const server = jayson.Server({
     editComm: async ({id, data }) => await comments.update(data)
 });
 
-server.http().listen(3000);
+server.http().listen(3000,()=>{
+    //логирования log.txt
+    log('listenig on port 3000');
+});
 console.log("server is running");
