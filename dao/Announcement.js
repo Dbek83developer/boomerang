@@ -1,5 +1,6 @@
 class Announcement {
-    constructor({ title, text, owner, status, owner_phone, img_url, region, country, count_views, due_date, created_at }) {
+    constructor({ id, title, text, owner, status, owner_phone, img_url, region, country, count_views, due_date, created_at }) {
+        this.id = id;
         this.title = title;
         this.text = text;
         this.owner = owner;

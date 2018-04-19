@@ -45,15 +45,15 @@ const server = jayson.Server({
         due_date,
         created_at
     }),
-    deleteAnn: async () => await annDao.delete(id),
-    getByIdAnn: async (id) => {
-        let toUpdate = await annDao.getById(id).count_views + 1;
-        await annDao.update(id, toUpdate);
+    deleteAnn: async ({id}) => await annDao.delete(id),
+    getByIdAnn: async ({id}) => await annDao.getById(id),/*{/*
+        let toUpdate = await annDao.getById({id}).count_views + 1;
+        await annDao.update(id, toUpdate);*/
         //логирования
-        log('call method getByIdAnn and increase count views');
-        return annDao.getById(id)
+      /*  log('call method getByIdAnn and increase count views');
+        return annDao.getById({id});
 
-    },
+    },*/
     getByCountryAnn: async () => await annDao.getByCountry(country),
     getCommList: async () => await comments.getList(),
     addComm: async ({ann_id, owner_name, text}) => await comments.create({ann_id, owner_name, text}),
